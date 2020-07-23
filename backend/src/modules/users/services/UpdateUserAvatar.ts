@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
@@ -9,8 +10,11 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUpdateUserAvatarDTO from '@modules/users/dtos/IUpdateUserAvatarDTO';
 
+@injectable()
 class UpdateUserAvatarService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UserRepository') private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     user_id,

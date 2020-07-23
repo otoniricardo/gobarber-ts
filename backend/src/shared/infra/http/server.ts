@@ -34,4 +34,4 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => console.log('Server listenning on port 3333'));
+app.listen(3333, () => console.log('Server listenning on port 3333!'));

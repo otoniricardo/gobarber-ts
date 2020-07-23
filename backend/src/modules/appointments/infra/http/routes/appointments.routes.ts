@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { parseISO } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
-import AppointmentsRepository from '../repositories/AppointmentRepository';
-import CreateAppointmentService from '../services/CreateAppointmentService';
+import AppointmentsRepository from '@modules/appointments/repositories/AppointmentRepository';
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
-import enrureAuthenticated from '../middlewares/ensureauthentication';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureauthentication';
 
 const appointmentsRouter = Router();
 
-appointmentsRouter.use(enrureAuthenticated);
+appointmentsRouter.use(ensureAuthenticated);
 
 appointmentsRouter.post('/', async (request, response) => {
   const { provider_id, date } = request.body;

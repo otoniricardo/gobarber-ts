@@ -20,7 +20,6 @@ class CreateUserService {
 
   async execute({ name, email, password }: ICreateUserDTO): Promise<User> {
     const checkEmailExists = await this.usersRepository.findByEmail(email);
-
     if (checkEmailExists) throw new AppError('email already in use');
 
     const hashedPassword = await this.hashProvider.generateHash(password);

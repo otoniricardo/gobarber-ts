@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureauthentication';
 
@@ -18,10 +19,20 @@ appointmentsRouter.get('/', providersController.index);
 
 appointmentsRouter.get(
   '/:provider_id/month-avaliability',
+  celebrate({
+    [Segments.PARAMS]: {
+      provider_id: Joi.string().uuid().required(),
+    },
+  }),
   providersMonthAvaliabilityController.index,
 );
 appointmentsRouter.get(
   '/:provider_id/day-avaliability',
+  celebrate({
+    [Segments.PARAMS]: {
+      provider_id: Joi.string().uuid().required(),
+    },
+  }),
   providersDayAvaliabilityController.index,
 );
 

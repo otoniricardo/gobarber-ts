@@ -15,6 +15,7 @@ const providersMonthAvaliabilityController = new ProvidersMonthAvaliabilityContr
 const providersDayAvaliabilityController = new ProvidersDayAvaliabilityController();
 
 appointmentsRouter.get('/', providersController.index);
+
 appointmentsRouter.get(
   '/:provider_id/month-avaliability',
   providersMonthAvaliabilityController.index,

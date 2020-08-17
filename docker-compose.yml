@@ -25,7 +25,25 @@ services:
       - ./volumes/pgadmin:/var/lib/pgadmin
       - ./volumes/config_local.py:/pgadmin
 
-networks:
-  gobarber-network:
-    driver: bridge
-      
+  mongo:
+    container_name: mongo
+    image: mongo
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: mongo
+    #   MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./volumes/mongo:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: mongo
+      ME_CONFIG_BASICAUTH_PASSWORD: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongo
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
+    links:
+      - mongo

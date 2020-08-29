@@ -5,6 +5,7 @@ import AppError from '@shared/errors/AppError';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashprovider';
+import ICacheProvider from '@shared/container/providers/CashProvider/models/ICasheProvider';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 
@@ -16,6 +17,9 @@ class CreateUserService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   async execute({ name, email, password }: ICreateUserDTO): Promise<User> {
@@ -29,6 +33,8 @@ class CreateUserService {
       email,
       password: hashedPassword,
     });
+
+    await this.cacheProvider.invalidatePrefix('providers-list');
 
     return user;
   }

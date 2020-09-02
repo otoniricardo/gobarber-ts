@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "ts-node -r tsconfig-paths/register src/shared/infra/http/server.ts",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "docker": "docker-compose down && docker-compose up -d"
   },
   "dependencies": {
     "rate-limiter-flexible": "^2.1.10",

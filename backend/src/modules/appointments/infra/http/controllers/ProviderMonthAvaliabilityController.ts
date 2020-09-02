@@ -6,16 +6,16 @@ import ListProviderMonthAvaliabilityService from '@modules/appointments/services
 export default class ProviderMonthAvaliabilityController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { provider_id } = request.params;
-    const { month, year } = request.body;
+    const { month, year } = request.query;
 
     const listProviderMonthAvaliability = container.resolve(
       ListProviderMonthAvaliabilityService,
     );
 
     const avaliability = await listProviderMonthAvaliability.execute({
-      month,
+      month: Number(month),
       provider_id,
-      year,
+      year: Number(year),
     });
 
     return response.json(avaliability);

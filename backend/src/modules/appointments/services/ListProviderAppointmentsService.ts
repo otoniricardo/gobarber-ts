@@ -4,6 +4,7 @@ import IAppointmentRepository from '@modules/appointments/repositories/IAppointm
 import IFindAllFromProviderDTO from '@modules/appointments/dtos/IFindAllFromProviderDTO';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import ICacheProvider from '@shared/container/providers/CashProvider/models/ICasheProvider';
+import { classToClass } from 'class-transformer';
 
 @injectable()
 class ListProviderAppointmentsService {
@@ -35,7 +36,7 @@ class ListProviderAppointmentsService {
         },
       );
 
-      await this.cacheProvider.save(key, appointments);
+      await this.cacheProvider.save(key, classToClass(appointments));
     }
 
     return appointments;

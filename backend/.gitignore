@@ -2,7 +2,6 @@
 .env
 node_modules/
 coverage
-ormconfig.json
 tmp/*
 !tmp/.gitKeep
 volumes

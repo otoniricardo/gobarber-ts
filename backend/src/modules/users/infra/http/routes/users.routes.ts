@@ -44,7 +44,7 @@ usersRouter.put(
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       new_password: Joi.string(),
-      current_password: Joi.string(),
+      current_password: Joi.string().required(),
       password_confirmation: Joi.string().valid(Joi.ref('new_password')),
     },
   }),
